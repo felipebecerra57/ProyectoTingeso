@@ -1,4 +1,4 @@
-package com.example.demo.Entities;
+package com.example.demo.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,14 +22,16 @@ public class TuristicPackageEntity {
 
     private String name;
     private String destiny;
+    private Float price;
     private String description;
     private Date inicialDate;
     private Date finalDate;
     private Integer durationDays;
-    private Float price;
     private Integer capacity;
     private String state;
     private List<String> services;
     private List<String> conditions;
     private List<String> restrictions;
+
+
 }
