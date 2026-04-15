@@ -19,11 +19,11 @@ public class ReservationEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "client_id", nullable = false)
     private UserEntity client;
 
     @ManyToOne
-    @JoinColumn(name = "turistic_package_id")
+    @JoinColumn(name = "turistic_package_id", nullable = false)
     private TuristicPackageEntity turisticPackage;
 
     private Date date;

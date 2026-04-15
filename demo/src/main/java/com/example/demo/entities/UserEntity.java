@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 @Data
@@ -23,6 +25,6 @@ public class UserEntity {
     private String rut;
     private String nationality;
     private Boolean accountState;
-    //private List<ReservationEntity> reservationHistory;
+    private List<ReservationEntity> reservationHistory;
 
 }

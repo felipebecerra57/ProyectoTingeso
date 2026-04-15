@@ -10,6 +10,6 @@ public interface TuristicPackageRepository extends JpaRepository<TuristicPackage
     List<TuristicPackageEntity> findByPriceLessThan(Float price);
     List<TuristicPackageEntity> findByPriceGreaterThan(Float price);
     List<TuristicPackageEntity> findByCapacityGreaterThan(Integer capacity);
-    List<TuristicPackageEntity> findByState(String state);
+    List<TuristicPackageEntity> findByStatus(String status);
 
 }
