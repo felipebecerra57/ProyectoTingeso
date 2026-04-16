@@ -13,6 +13,6 @@ public class ReservationService {
     ReservationRepository repository;
 
     public List<ReservationEntity> getReservationHistory(Long userId){
-        return repository.findByUser(userId);
+        return repository.findByClient(userId);
     }
 }

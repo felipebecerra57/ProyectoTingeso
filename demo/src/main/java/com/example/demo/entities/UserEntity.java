@@ -25,6 +25,6 @@ public class UserEntity {
     private String rut;
     private String nationality;
     private Boolean accountState;
-    private List<ReservationEntity> reservationHistory;
+    //private List<ReservationEntity> reservationHistory;
 
 }
