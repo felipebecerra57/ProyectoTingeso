@@ -28,7 +28,7 @@ public class TuristicPackageEntity {
     private Date finalDate;
     private Integer durationDays;
     private Integer capacity;
-    private String status;
+    private Boolean status;
     private List<String> services;
     private List<String> conditions;
     private List<String> restrictions;

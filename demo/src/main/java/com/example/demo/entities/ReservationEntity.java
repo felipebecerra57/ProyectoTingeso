@@ -20,7 +20,7 @@ public class ReservationEntity {
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
-    private UserEntity client;
+    private ClientEntity client;
 
     @ManyToOne
     @JoinColumn(name = "turistic_package_id", nullable = false)

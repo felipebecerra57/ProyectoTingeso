@@ -55,4 +55,7 @@ public class TuristicPackageService {
     public List<TuristicPackageEntity> findByStatus(String status){
         return repository.findByStatus(status);
     }
+    public List<TuristicPackageEntity> findByDurationDays(Integer duration){
+        return repository.findByDurationDaysGreaterThan(duration);
+    }
 }
