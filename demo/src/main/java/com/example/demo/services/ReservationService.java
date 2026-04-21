@@ -1,9 +1,11 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.ClientEntity;
 import com.example.demo.entities.ReservationEntity;
 import com.example.demo.entities.TuristicPackageEntity;
 import com.example.demo.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -13,7 +15,6 @@ import java.util.List;
 public class ReservationService {
     @Autowired
     ReservationRepository repository;
-
     public ReservationEntity createResevation(ReservationEntity newReservation) throws Exception {
         if (newReservation.getPassengers() <= 0){
             throw new Exception("Los pasajeros deben ser mayor a cero. ");
@@ -28,6 +29,11 @@ public class ReservationService {
             throw new Exception("Los pasajeros exceden la capacidad del paquete turístico. ");
         }
         // AGREGAR LÓGICA DE AGENDA DE RESERVA (restar cupos, agregar a cliente, generar pago)
+        TuristicPackageEntity turisticPackage = newReservation.getTuristicPackage();
+        turisticPackage.setCapacity(turisticPackage.getCapacity() - newReservation.getPassengers());
+
+        ClientEntity client = newReservation.getClient();
+        client.getReservationHistory().add(newReservation);
         return repository.save(newReservation);
     }
 
