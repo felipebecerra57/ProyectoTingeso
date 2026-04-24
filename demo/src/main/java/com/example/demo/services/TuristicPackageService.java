@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import com.example.demo.controllers.DTO.TuristicPackageInDTO;
+import com.example.demo.controllers.DTO.TuristicPackageOutDTO;
 import com.example.demo.entities.TuristicPackageEntity;
 import com.example.demo.repositories.TuristicPackageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,15 @@ public class TuristicPackageService {
     @Autowired
     TuristicPackageRepository repository;
 
-    public TuristicPackageEntity createPackage(TuristicPackageEntity newPackage)throws Exception{
-        //Valid name length
+    public TuristicPackageOutDTO createPackage(TuristicPackageInDTO newPackage)throws Exception{
+        TuristicPackageOutDTO DTOout = new TuristicPackageOutDTO();
+        TuristicPackageEntity packageEntity = new TuristicPackageEntity();
+
+        // ---- Validate the data from the DTO
         if (newPackage.getName().length() <= 0){
             throw new Exception("El nombre debe tener un largo mayor a cero. ");
         }
+        // Destiny length
         if (newPackage.getDestiny().length() <= 0){
             throw new Exception("El destino debe tener un largo mayor a cero. ");
         }
@@ -35,14 +41,18 @@ public class TuristicPackageService {
         if (newPackage.getDurationDays() <= 0){
             throw new Exception("La duración deber mayor a cero días. ");
         }
-        return repository.save(newPackage);
+        //----set the attributes from the dto to the entity
+        packageEntity.setFromDTO(packageEntity, newPackage);
+        repository.save(packageEntity);
+        DTOout.setFromEntity(packageEntity, DTOout);
+        return DTOout;
     }
 
-    public List getAllTuristicPackages(){
+    public List<TuristicPackageEntity> getAllTuristicPackages(){
         return repository.findAll();
     }
 
-    public List findByDestiny(String destiny){
+    public List<TuristicPackageEntity> findByDestiny(String destiny){
         return repository.findByDestiny(destiny);
     }
 

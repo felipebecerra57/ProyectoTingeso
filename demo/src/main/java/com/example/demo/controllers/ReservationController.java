@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 
+import com.example.demo.controllers.DTO.ReservationInDTO;
+import com.example.demo.controllers.DTO.ReservationOutDTO;
 import com.example.demo.entities.ReservationEntity;
 import com.example.demo.services.ReservationService;
 import org.springframework.http.HttpStatus;
@@ -16,29 +18,29 @@ import java.util.List;
 public class ReservationController {
     ReservationService service;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('Admin')")
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody ReservationEntity reservation){
+    public ResponseEntity<?> create(@RequestBody ReservationInDTO reservation){
         try{
-            ReservationEntity saveReservation = service.createResevation(reservation);
+            ReservationOutDTO saveReservation = service.createResevation(reservation);
             return ResponseEntity.status(HttpStatus.CREATED).body("Reserva creada exitósamente");
         }
         catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('Admin')")
     @GetMapping("/findByUser/{userId}")
     public ResponseEntity<List<ReservationEntity>> getReservationsByUser(@PathVariable Long userId){
         return ResponseEntity.ok(service.getReservationHistory(userId));
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('Admin')")
     @GetMapping("/findByDate/{date}")
     public ResponseEntity<List<ReservationEntity>> findByDate(Date date){
         List<ReservationEntity> reservations = service.findByDate(date);
         return ResponseEntity.ok(reservations);
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('Admin')")
     @GetMapping("/findByPaid/{paid}")
     public ResponseEntity<List<ReservationEntity>> findByPaid(Boolean paid){
         List<ReservationEntity> reservations = service.findByPaid(paid);

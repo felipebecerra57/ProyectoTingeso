@@ -1,26 +1,12 @@
-package com.example.demo.entities;
+package com.example.demo.controllers.DTO;
 
-import com.example.demo.controllers.DTO.TuristicPackageInDTO;
-import lombok.AllArgsConstructor;
+import com.example.demo.entities.TuristicPackageEntity;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
-
-@Entity
-@Table(name = "TuristicPackage")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class TuristicPackageEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long id;
-
+public class TuristicPackageOutDTO {
     private String name;
     private String destiny;
     private Float price;
@@ -33,7 +19,7 @@ public class TuristicPackageEntity {
     private List<String> services;
     private List<String> conditions;
 
-    public TuristicPackageEntity setFromDTO(TuristicPackageEntity turisticPackage, TuristicPackageInDTO packageDTO){
+    public TuristicPackageOutDTO setFromEntity(TuristicPackageEntity packageDTO, TuristicPackageOutDTO turisticPackage){
         turisticPackage.setName(packageDTO.getName());
         turisticPackage.setDestiny(packageDTO.getDestiny());
         turisticPackage.setPrice(packageDTO.getPrice());
