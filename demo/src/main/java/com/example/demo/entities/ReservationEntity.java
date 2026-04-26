@@ -21,11 +21,13 @@ public class ReservationEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "client_id", nullable = false)
+    @JoinColumn(name = "clientId", nullable = false)
     private ClientEntity client;
 
-    @ManyToMany
-    @JoinColumn(name = "turistic_package_id", nullable = false)
+    @ManyToOne
+    @JoinTable(name = "turistic_package_id",
+            joinColumns = @JoinColumn(name = "clientId"),
+            inverseJoinColumns = @JoinColumn(name = "packageId"))
     private TuristicPackageEntity turisticPackage;
 
     private Date date;
@@ -37,7 +39,7 @@ public class ReservationEntity {
     // conditions
 
     public ReservationEntity setFromDTO(ReservationEntity reservation, ReservationInDTO reservationDTO){
-        //reservation.setTuristicPackage(reservationDTO.getPackagesIds());
+        //reservation.setTuristicPackage(reservationInDTO.getPackagesIds());
         reservation.setDate(reservationDTO.getDate());
         reservation.setPassengers(reservationDTO.getPassengers());
         reservation.setVigency(reservationDTO.getVigencyDays());

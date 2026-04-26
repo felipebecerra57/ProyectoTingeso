@@ -31,7 +31,7 @@ function Navbar() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        TravelAgency: agenda tu viaje aquí
+                        TravelAgency : Vuela feliz
                     </Typography>
 
                     {initialized && (
@@ -55,8 +55,8 @@ function Navbar() {
                     )}
                 </Toolbar>
             </AppBar>
-
-           
+            
+            <SideMenu open = {open} toggleDrawer={toggleDrawer}></SideMenu>
 
         </Box>
     );
