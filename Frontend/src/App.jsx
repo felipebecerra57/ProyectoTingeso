@@ -6,6 +6,8 @@ import './App.css'
 import { useKeycloak } from '@react-keycloak/web';
 import {BrowserRouter , Routes, Route} from 'react-router-dom';
 import Navbar from './components/Navbar'
+import PackageList from './pages/packageList';
+import Home from './components/Home';
 
 function App() {
   const { keycloak, initialized } = useKeycloak();
@@ -34,8 +36,8 @@ function App() {
     <BrowserRouter>
       <Navbar/>
       <Routes>
-        <Route path="/home " element ={<Home/>}/>
-
+        <Route path="/" element ={<Home/>}/>
+        <Route path="/paquetes" element={<PackageList />} />
       </Routes>
     </BrowserRouter>
     

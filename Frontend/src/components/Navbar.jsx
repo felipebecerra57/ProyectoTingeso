@@ -6,7 +6,8 @@ import Box from '@mui/material/Box';
 import MenuIcon from "@mui/icons-material/Menu";
 import {Button, IconButton} from "@mui/material";
 import {useKeycloak} from "@react-keycloak/web";
-//import Sidemenu from "./Sidemenu.jsx";
+import Home from './Home';
+import Sidemenu from "./Sidemenu.jsx";
 
 
 function Navbar() {
@@ -55,8 +56,7 @@ function Navbar() {
                     )}
                 </Toolbar>
             </AppBar>
-            
-            <SideMenu open = {open} toggleDrawer={toggleDrawer}></SideMenu>
+            <Sidemenu open={open} toggleDrawer={toggleDrawer}></Sidemenu>
 
         </Box>
     );

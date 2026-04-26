@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/turisticPackages")
+@CrossOrigin("*")
 public class TuristicPackageController {
 
     @Autowired

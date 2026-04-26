@@ -21,9 +21,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // <--- ESTA LÍNEA ES CLAVE
+                .csrf(csrf -> csrf.disable()) // Desactivar CSRF es necesario para POST/PUT con JWT
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/public/**").permitAll()
-                        .requestMatchers("/api/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 ->
@@ -33,21 +34,7 @@ public class SecurityConfig {
         return http.build();
     }
 
-    private JwtAuthenticationConverter jwtAuthConverter() {
-        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-        converter.setJwtGrantedAuthoritiesConverter(jwt -> {
-            Collection<GrantedAuthority> authorities = new ArrayList<>();
-            Map<String, Object> realmAccess = (Map<String, Object>) jwt.getClaims().get("realm_access");
 
-            if (realmAccess != null && realmAccess.get("roles") instanceof List<?>) {
-                List<?> roles = (List<?>) realmAccess.get("roles");
-                roles.forEach(r -> authorities.add(new SimpleGrantedAuthority("ROLE_" + r)));
-            }
-
-            return authorities;
-        });
-        return converter;
-    }
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -62,6 +49,21 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+    private JwtAuthenticationConverter jwtAuthConverter() {
+        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
+        converter.setJwtGrantedAuthoritiesConverter(jwt -> {
+            Collection<GrantedAuthority> authorities = new ArrayList<>();
+            Map<String, Object> realmAccess = (Map<String, Object>) jwt.getClaims().get("realm_access");
+
+            if (realmAccess != null && realmAccess.get("roles") instanceof List<?>) {
+                List<?> roles = (List<?>) realmAccess.get("roles");
+                roles.forEach(r -> authorities.add(new SimpleGrantedAuthority("ROLE_" + r)));
+            }
+
+            return authorities;
+        });
+        return converter;
     }
 
 }
