@@ -1,10 +1,10 @@
-import PackageList from "../pages/packageList.jsx";
+import PackageListAdmin from "../pages/packageListAdmin.jsx";
 
 const Home = () => {
     return (
         <div>
             <h1>TravelAgency: Sistema de Reservas</h1>
-            <p>Bienvenido al sistema...</p>
+            <p>Welcome back diva!</p>
 
         </div>
     );

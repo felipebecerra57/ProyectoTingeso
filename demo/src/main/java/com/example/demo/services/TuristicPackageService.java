@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class TuristicPackageService {
@@ -38,14 +39,35 @@ public class TuristicPackageService {
         if (newPackage.getCapacity() <= 0){
             throw new Exception("Los cupos deben ser mayor a cero. ");
         }
-        if (newPackage.getDurationDays() <= 0){
-            throw new Exception("La duración deber mayor a cero días. ");
-        }
+
         //----set the attributes from the dto to the entity
+        long diffInMillies = Math.abs(newPackage.getFinalDate().getTime() - newPackage.getInicialDate().getTime());
+        long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        packageEntity.setDurationDays((int) diffInDays);
         packageEntity.setFromDTO(packageEntity, newPackage);
         repository.save(packageEntity);
         DTOout.setFromEntity(packageEntity, DTOout);
         return DTOout;
+    }
+
+    public Boolean deletePackage(Long id){
+        try{
+            repository.deleteById(id);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
+    public TuristicPackageOutDTO updatePackage(Long id, TuristicPackageInDTO dto){
+        TuristicPackageEntity pkg = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Paquetito no encontrado"));
+        pkg.setFromDTO(pkg, dto);
+        repository.save(pkg);
+        TuristicPackageOutDTO outdto = new TuristicPackageOutDTO();
+        outdto.setFromEntity(pkg, outdto);
+        return outdto;
     }
 
     public List<TuristicPackageEntity> getAllTuristicPackages(){

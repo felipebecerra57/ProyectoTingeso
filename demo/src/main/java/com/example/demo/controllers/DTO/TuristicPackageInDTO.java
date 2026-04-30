@@ -14,8 +14,8 @@ public class TuristicPackageInDTO {
     private Date finalDate;
     private Integer durationDays;
     private Integer capacity;
-    private Boolean status;
+    private Boolean status = true;
     private List<String> services;
     private List<String> conditions;
-    private List<String> restrictions;
+
 }

@@ -6,8 +6,12 @@ import './App.css'
 import { useKeycloak } from '@react-keycloak/web';
 import {BrowserRouter , Routes, Route} from 'react-router-dom';
 import Navbar from './components/Navbar'
-import PackageList from './pages/packageList';
+import PackageListAdmin from './pages/packageListAdmin.jsx';
+import PackageList from './pages/PackageList.jsx';
+import PackageDetail from './pages/PackageDetail.jsx';
 import Home from './components/Home';
+import { Container } from '@mui/material';
+import CreatePackage from "./pages/CreatePackage.jsx";
 
 function App() {
   const { keycloak, initialized } = useKeycloak();
@@ -35,10 +39,15 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar/>
-      <Routes>
-        <Route path="/" element ={<Home/>}/>
-        <Route path="/paquetes" element={<PackageList />} />
-      </Routes>
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/paquetes" element={<PackageListAdmin />} />
+          <Route path="/paquetesTuristicos" element={<PackageList />} />
+          <Route path="/nuevoPaquete" element={<CreatePackage />}/>
+          <Route path="/DetallePaquete" element={<PackageDetail/>}/>
+        </Routes>
+      </Container>
     </BrowserRouter>
     
   )

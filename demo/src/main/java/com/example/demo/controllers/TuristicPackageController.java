@@ -26,12 +26,23 @@ public class TuristicPackageController {
     public ResponseEntity<?> create(@RequestBody TuristicPackageInDTO turisticPackage){
         try{
             TuristicPackageOutDTO savePackage = service.createPackage(turisticPackage);
-            return ResponseEntity.status(HttpStatus.CREATED).body(":p");
+            return ResponseEntity.ok(service.createPackage(turisticPackage));
         }
         catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @PreAuthorize("hasRole('Admin')")
+    @DeleteMapping("/delete{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable Long id){
+        return ResponseEntity.ok(service.deletePackage(id));
+    }
+    @PreAuthorize("hasRole('Admin')")
+    @PutMapping("/update{id}")
+    public ResponseEntity<TuristicPackageOutDTO> update(@PathVariable Long id, @RequestBody TuristicPackageInDTO updateData) {
+        return ResponseEntity.ok(service.updatePackage(id, updateData));
+    }
+
     @PreAuthorize("hasAnyRole('Client','Admin')")
     @GetMapping("/all")
     public ResponseEntity<List<TuristicPackageEntity>> listTuristicPackages(){

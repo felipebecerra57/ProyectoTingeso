@@ -14,12 +14,19 @@ import DiscountIcon from "@mui/icons-material/Discount";
 import HailIcon from "@mui/icons-material/Hail";
 import MedicationLiquidIcon from "@mui/icons-material/MedicationLiquid";
 import MoreTimeIcon from "@mui/icons-material/MoreTime";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth"
 import HomeIcon from "@mui/icons-material/Home";
 import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
 import { useNavigate } from "react-router-dom";
+import {useKeycloak} from "@react-keycloak/web";
 
 export default function Sidemenu({ open, toggleDrawer }) {
     const navigate = useNavigate();
+    const { keycloak } = useKeycloak();
+
+    const roles = keycloak.tokenParsed?.realm_access?.roles || [];
+    const isAdmin = roles.includes('Admin');
+
     const listOptions = () => (
         <Box
             role="presentation"
@@ -34,17 +41,40 @@ export default function Sidemenu({ open, toggleDrawer }) {
                 </ListItemButton>
 
                 <Divider />
+                {isAdmin ? (
+                    <>
+                        <ListItemButton onClick={() =>
+                            navigate("/paquetes")}>
+                            <ListItemIcon>
+                                <AirplaneTicketIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Paquetes Turísticos" />
+                        </ListItemButton>
+                        <Divider />
+                    </>
+                ):(
+                    <>
+                        <ListItemButton onClick={() =>
+                            navigate("/paquetesTuristicos")}>
+                            <ListItemIcon>
+                                <AirplaneTicketIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Paquetes Turísticos" />
+                        </ListItemButton>
 
-            </List>
-                <ListItemButton onClick={() => navigate("/paquetes")}>
-                    <ListItemIcon>
-                        <AirplaneTicketIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Paquetes Turísticos" />
-                </ListItemButton>
-            <Divider />
+                        {/* onClick={() => navigate(`/reservas`)}*/}
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <CalendarMonthIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Reservas Actuales" />
+                        </ListItemButton>
+                        <Divider />
+                    </>
+                )}
 
-            <List>
+                <Divider />
+
 
             </List>
         </Box>
