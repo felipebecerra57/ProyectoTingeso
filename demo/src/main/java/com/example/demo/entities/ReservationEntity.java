@@ -1,11 +1,12 @@
 package com.example.demo.entities;
 
-import com.example.demo.controllers.DTO.ReservationInDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,27 +25,23 @@ public class ReservationEntity {
     @JoinColumn(name = "clientId", nullable = false)
     private ClientEntity client;
 
-    @ManyToOne
-    @JoinTable(name = "turistic_package_id",
-            joinColumns = @JoinColumn(name = "clientId"),
-            inverseJoinColumns = @JoinColumn(name = "packageId"))
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "package_id", nullable = false)
     private TuristicPackageEntity turisticPackage;
+
+    @ManyToMany
+    @JoinTable(
+            name = "reservationDiscounts",
+            joinColumns = @JoinColumn(name = "reservationId"),
+            inverseJoinColumns = @JoinColumn(name = "discountId")
+    )
+    private List<DiscountEntity> discounts = new ArrayList<>();
 
     private Date date;
     private Integer passengers;
-    private Integer vigency; //in days
+    //private Integer vigency; //in days
     private String status;
+    private Double finalAmount;
     private Boolean paid;
-    // services
-    // conditions
 
-    public ReservationEntity setFromDTO(ReservationEntity reservation, ReservationInDTO reservationDTO){
-        //reservation.setTuristicPackage(reservationInDTO.getPackagesIds());
-        reservation.setDate(reservationDTO.getDate());
-        reservation.setPassengers(reservationDTO.getPassengers());
-        reservation.setVigency(reservationDTO.getVigencyDays());
-        reservation.setStatus(reservationDTO.getStatus());
-        reservation.setPaid(reservationDTO.getPaid());
-        return reservation;
-    }
 }

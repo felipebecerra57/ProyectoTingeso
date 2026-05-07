@@ -57,7 +57,7 @@ const CreatePackage = () => {
                 <Button
                     variant="outlined"
                     color="secondary"
-                    onClick={() => navigate("/paquetes")} // O navigate(-1)
+                    onClick={() => navigate("/paquetes")}
                 >
                     Volver
                 </Button>

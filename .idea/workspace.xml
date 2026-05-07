@@ -4,29 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9c29ed1d-57e3-4cb2-a172-8fa430f2c65e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Frontend/src/components/PackageCard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/pages/CreatePackage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/pages/PackageDetail.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/pages/PackageList.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/pages/packageListAdmin.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/services/reservation.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Tingeso.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Tingeso.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="9c29ed1d-57e3-4cb2-a172-8fa430f2c65e" name="Changes" comment="View of client &amp; delete and edit packages.">
+      <change afterPath="$PROJECT_DIR$/Frontend/src/pages/ReservationList.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/DiscountController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/entities/DiscountEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/repositories/DiscountRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/services/DiscountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/components/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/components/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/components/PackageCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/components/PackageCard.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/components/Sidemenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/components/Sidemenu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/pages/packageList.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/services/package.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/services/package.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/DTO/TuristicPackageInDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/DTO/TuristicPackageInDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/TuristicPackageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/TuristicPackageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/services/TuristicPackageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/services/TuristicPackageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/pages/CreatePackage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/pages/CreatePackage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/pages/PackageDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/pages/PackageDetail.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/services/reservation.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/services/reservation.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/DTO/ReservationInDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/DTO/ReservationInDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/DTO/ReservationOutDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/DTO/ReservationOutDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/ReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/entities/ReservationEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/entities/ReservationEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/entities/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/entities/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/services/ReservationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -80,6 +88,7 @@
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/snap/intellij-idea-community/743/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -100,11 +109,41 @@
       <option name="presentableId" value="Default" />
       <updated>1777471190463</updated>
       <workItem from="1777471191636" duration="8851000" />
-      <workItem from="1777582107127" duration="6851000" />
+      <workItem from="1777582107127" duration="14619000" />
+      <workItem from="1777769696931" duration="10690000" />
+      <workItem from="1777853697238" duration="893000" />
+      <workItem from="1777922985248" duration="10169000" />
+      <workItem from="1778027815849" duration="2747000" />
+      <workItem from="1778096711426" duration="6215000" />
+      <workItem from="1778104256326" duration="11231000" />
     </task>
+    <task id="LOCAL-00001" summary="View of client &amp; delete and edit packages.">
+      <option name="closed" value="true" />
+      <created>1777593317903</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1777593317904</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="View of client &amp; delete and edit packages." />
+    <option name="LAST_COMMIT_MESSAGE" value="View of client &amp; delete and edit packages." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/Frontend/src/App.jsx</url>
+          <line>26</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

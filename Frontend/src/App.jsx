@@ -1,7 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 import { useKeycloak } from '@react-keycloak/web';
 import {BrowserRouter , Routes, Route} from 'react-router-dom';
@@ -12,6 +8,7 @@ import PackageDetail from './pages/PackageDetail.jsx';
 import Home from './components/Home';
 import { Container } from '@mui/material';
 import CreatePackage from "./pages/CreatePackage.jsx";
+import ReservationList from "./pages/ReservationList.jsx"
 
 function App() {
   const { keycloak, initialized } = useKeycloak();
@@ -45,7 +42,8 @@ function App() {
           <Route path="/paquetes" element={<PackageListAdmin />} />
           <Route path="/paquetesTuristicos" element={<PackageList />} />
           <Route path="/nuevoPaquete" element={<CreatePackage />}/>
-          <Route path="/DetallePaquete" element={<PackageDetail/>}/>
+          <Route path="/detallePaquete" element={<PackageDetail/>}/>
+          <Route path="/misReservas" element={<ReservationList/>}/>
         </Routes>
       </Container>
     </BrowserRouter>

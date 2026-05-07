@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public abstract class UserEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String rut;

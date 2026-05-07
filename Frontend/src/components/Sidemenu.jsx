@@ -62,8 +62,8 @@ export default function Sidemenu({ open, toggleDrawer }) {
                             <ListItemText primary="Paquetes Turísticos" />
                         </ListItemButton>
 
-                        {/* onClick={() => navigate(`/reservas`)}*/}
-                        <ListItemButton>
+                        <ListItemButton onClick={()=>
+                            navigate(`/misReservas`)}>
                             <ListItemIcon>
                                 <CalendarMonthIcon />
                             </ListItemIcon>

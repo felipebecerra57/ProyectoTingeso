@@ -1,6 +1,9 @@
 import { Card, CardContent, CardMedia, Typography, Button, Box, Chip } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-const PackageCard = ({ pkg, onReserve }) => {
+
+const PackageCard = ({ pkg }) => {
+    const navigate = useNavigate();
     return (
         <Card sx={{ maxWidth: 345, borderRadius: 4, boxShadow: 3 }}>
             {/* Picture of the destiny
@@ -31,9 +34,9 @@ const PackageCard = ({ pkg, onReserve }) => {
                     fullWidth
                     variant="contained"
                     sx={{ mt: 2, borderRadius: 2, bgcolor: '#1a237e' }}
-                    onClick={() => onReserve(pkg.id)}
+                    onClick={() => navigate("/detallePaquete", {state: {initialData: pkg}})}
                 >
-                    Ver oferta
+                    Ver paquete
                 </Button>
             </CardContent>
         </Card>
