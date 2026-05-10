@@ -9,7 +9,7 @@ import {
     ListItemText,
     ListItemIcon,
     Tabs,
-    Button, TextField, Paper
+    Button, TextField, Paper, Chip
 } from '@mui/material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -80,8 +80,9 @@ const PackageDetail = () => {
                     const response = await reservationService.simulate(reservationData, keycloak.token);
                     setSimulacion({
                         original: response.originalPrice,
-                        final: response.finalPrice,
-                        descuentos: response.discounts
+                        finalPrice: response.finalPrice,
+                        descuentosName: response.discounts,
+                        discountsName: response.discountsName
                     });
                 } catch (error) {
                     console.error("Error en simulación", error);
@@ -97,7 +98,7 @@ const PackageDetail = () => {
         try {
             await reservationService.create(reservationData, keycloak.token);
             alert("¡Reserva realizada con éxito!");
-            // navigate("/mis-reservas");
+            navigate("/misReservas");
         } catch (error) {
             console.error("Error al reservar:", error); // POR MIENTRAS
             alert("Hubo un error al procesar tu reserva.");
@@ -224,37 +225,47 @@ const PackageDetail = () => {
                                         type="number"
                                         fullWidth
                                         value={reservationData.passengers}
-                                        onChange={(e) => setReservationData({...reservationData, passengers: e.target.value})}
-                                        InputProps={{ inputProps: { min: 1, max: initialData.capacity } }}
+                                        onChange={(e) => {
+                                            const val = parseInt(e.target.value);
+                                            // Solo actualizamos si es mayor a 0 y no supera el cupo disponible
+                                            if (val > 0 && val <= initialData.capacity) {
+                                                setReservationData({ ...reservationData, passengers: val });
+                                            }
+                                        }}
+                                        InputProps={{
+                                            inputProps: {
+                                                min: 1,
+                                                max: initialData.capacity
+                                            }
+                                        }}
+                                        helperText={`Cupos disponibles: ${initialData.capacity}`}
                                     />
-                                    <Typography variant="caption" sx={{ opacity: 0.6 }}>
-                                        Cupos disponibles: {initialData.capacity}
-                                    </Typography>
                                 </Grid>
 
-                                {/* Initial Price */}
-                                <Grid item xs={12}>
-                                    <Typography variant="h6">
-                                        Total a pagar: ${(initialData.price * reservationData.passengers).toLocaleString('es-CL')}
-                                    </Typography>
-                                </Grid>
-
-                                {/* -------Simulation box*/}
-                                <Box sx={{ mt: 3, p: 2, bgcolor: 'rgba(255,255,255,0.05)', borderRadius: 2 }}>
+                                {/* -------SIMULATION BOX*/}
+                                {/* pricesss */}
+                                <Box sx={{ mt: 2, p: 2, bgcolor: 'rgba(255, 255, 255, 0.05)', borderRadius: 2 }}>
                                     <Typography variant="body1" sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        Precio Original: <span>${simulacion.original.toLocaleString('es-CL')}</span>
+                                        Precio Base: <span>${simulacion.original.toLocaleString('es-CL')}</span>
                                     </Typography>
 
-                                    {simulacion.descuentos.map((desc, index) => (
-                                        <Typography key={index} variant="body2" color="success.main" sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                            {desc}: <span>- ${(simulacion.original * 0.1).toLocaleString('es-CL')}</span>
-                                        </Typography>
-                                    ))}
+                                    {/* mapping of discounts from backend */}
+                                    <Box sx={{ mt: 1, mb: 1 }}>
+                                        {simulacion.discountsName && simulacion.discountsName.length > 0 ? (
+                                            simulacion.discountsName.map((desc, index) => (
+                                                <Typography key={index} variant="caption" sx={{ color: '#4caf50', display: 'block' }}>
+                                                    • {desc}
+                                                </Typography>
+                                            ))
+                                        ) : (
+                                            <Typography variant="caption" color="gray">Sin descuentos aplicables</Typography>
+                                        )}
+                                    </Box>
 
-                                    <Divider sx={{ my: 1, bgcolor: 'white' }} />
+                                    <Divider sx={{ my: 1.5, borderColor: 'rgba(255,255,255,0.2)' }} />
 
-                                    <Typography variant="h5" sx={{ display: 'flex', justifyContent: 'space-between', color: '#4caf50' }}>
-                                        Total Final: <span>${simulacion.final.toLocaleString('es-CL')}</span>
+                                    <Typography variant="h5" sx={{ display: 'flex', justifyContent: 'space-between', color: '#4caf50', fontWeight: 'bold' }}>
+                                        Total Final: <span>${(simulacion?.finalPrice || 0).toLocaleString('es-CL')}</span>
                                     </Typography>
                                 </Box>
 

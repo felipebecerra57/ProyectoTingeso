@@ -57,4 +57,8 @@ public class ReservationController {
     public ResponseEntity<List<ReservationOutDTO>> getMyReservations() {
         return ResponseEntity.ok(service.getClientReservations());
     }
+    @PutMapping("/{id}/pay")
+    public ResponseEntity<String> payReservation(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(service.payReservation(id));
+    }
 }

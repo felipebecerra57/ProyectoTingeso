@@ -1,4 +1,5 @@
 import httpClient from "../http-common";
+import axios from "axios";
 
 const create = (data, token) => {
     return httpClient.post('/api/reservations/create', data, {
@@ -24,4 +25,13 @@ const getReservations = async (token) => {
     return response.data;
 };
 
-export default { create,simulate,getReservations };
+const confirmPayment = async (reservationId, token) => {
+    console.log("Intentando pagar reserva con ID:", reservationId);
+    const response = await httpClient.put(`/api/reservations/${reservationId}/pay`, {}, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    return response.data;
+};
+export default { create,simulate,getReservations, confirmPayment };

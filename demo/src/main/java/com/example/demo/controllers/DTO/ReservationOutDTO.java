@@ -7,11 +7,14 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
 public class ReservationOutDTO {
+    private Long idReservation;
+
     @NotNull
     private String turisticPackage;
 
@@ -30,9 +33,11 @@ public class ReservationOutDTO {
     private List<DiscountEntity> discounts;
     private Double originalPrice;
     private Double finalPrice;
+    private List<String> discountsName = new ArrayList<>();
 
 
     public ReservationOutDTO setFromEntity(ReservationEntity reservationDTO, ReservationOutDTO reservation){
+        reservation.setIdReservation(reservationDTO.getId());
         reservation.setTuristicPackage(reservationDTO.getTuristicPackage().getName());
         reservation.setDestiny(reservationDTO.getTuristicPackage().getDestiny());
         reservation.setDate(reservationDTO.getDate());

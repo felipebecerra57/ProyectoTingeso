@@ -60,7 +60,6 @@ public class ReservationService {
         ReservationEntity reservationEntity = new ReservationEntity();
         String keycloakId = newReservation.getClient();
         ClientEntity client = getOrCreateClient(keycloakId);
-
         // ---- Validate the data from the DTO
         if (newReservation.getPassengers() <= 0){
             throw new Exception("Los pasajeros deben ser mayor a cero. ");
@@ -109,15 +108,12 @@ public class ReservationService {
         double finalAmount = basePrice - totalDiscount;
         reservationEntity.setDiscounts(discounts);
         reservationEntity.setFinalAmount(finalAmount);
-
-
         packageRepository.save(turisticPackage);
         reservationEntity = setFromDTO(reservationEntity, newReservation);
         reservationEntity.setClient(client);
         newReservation.setPaid(false);
         repository.save(reservationEntity);
         DTOout.setFromEntity(reservationEntity, DTOout);
-        //DTOout.setOriginalPrice(basePrice);
         return DTOout;
     }
 
@@ -127,27 +123,22 @@ public class ReservationService {
         String keycloakId = newReservation.getClient();
         ClientEntity client = getOrCreateClient(keycloakId);
 
+        ReservationOutDTO DTOut = new ReservationOutDTO();
         double basePrice = newReservation.getPassengers() * pkg.getPrice();
-        List<DiscountEntity> discounts = new ArrayList<>();
+        double totalDiscount = 0;
 
         if (newReservation.getPassengers() >= 3) {
-
+            totalDiscount += basePrice * 0.1;
+            DTOut.getDiscountsName().add("3 o más pasajeros! --> -10%");
         }
         // frequent client: if client has 3 or more reservations
         if (client.getReservationHistory() != null && client.getReservationHistory().size() >= 3) {
-            discounts.add(discountRepository.findById(1));
-        }
-        double totalDiscount = 0;
-        for (DiscountEntity d : discounts) {
-            totalDiscount += basePrice * d.getAmount();
+            totalDiscount += basePrice * 0.1;
+            DTOut.getDiscountsName().add("3 o más reservas con nosotros! --> -10%");
         }
         double finalAmount = basePrice - totalDiscount;
-
-        ReservationOutDTO DTOut = new ReservationOutDTO();
         DTOut.setOriginalPrice(basePrice);
         DTOut.setFinalPrice(finalAmount);
-        DTOut.setDiscounts(discounts);
-
         return DTOut;
     }
 
@@ -166,6 +157,13 @@ public class ReservationService {
         return reservationsDTO;
     }
 
+    public String payReservation(Long id){
+        ReservationEntity reservation = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
+        reservation.setStatus("PAGADA");
+        repository.save(reservation);
+        return ("Reserva pagada con exito!");
+    }
 
     public List<ReservationEntity> getReservationHistory(Long userId){
         return repository.findByClient(userId);

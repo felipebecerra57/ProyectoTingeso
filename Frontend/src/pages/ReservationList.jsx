@@ -13,9 +13,11 @@ import {
 } from '@mui/material';
 import reservationService from "../services/reservation.service.js";
 import keycloak from "../services/keycloak.js";
+import {useNavigate} from "react-router-dom";
 
 const ReservationList = () => {
     const [reservas, setReservas] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchReservas = async () => {
@@ -46,7 +48,7 @@ const ReservationList = () => {
                 </TableHead>
                 <TableBody>
                     {reservas.map((res) => (
-                        <TableRow key={res.id}>
+                        <TableRow key={res.idReservation}>
                             <TableCell sx={{ color: 'white' }}>{res.turisticPackage}</TableCell>
                             <TableCell sx={{ color: 'white' }}>{res.destiny}</TableCell>
                             <TableCell sx={{ color: 'white' }}>{new Date(res.date).toLocaleDateString()}</TableCell>
@@ -59,13 +61,35 @@ const ReservationList = () => {
                             </TableCell>
                             <TableCell>${res.finalPrice?.toLocaleString('es-CL')}</TableCell>
                             {/* if no está pagada, mostrar boton  */}
-                            <Button
-                                variant="outlined"
-                                color="primary"
-                                //onClick={() => navigate("/pagar")}
-                            >
-                                Pagar
-                            </Button>
+                            <TableCell>
+                                {res.status === 'PENDING' && (
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        size="small"
+                                        onClick={() => {
+                                            console.log("Enviando reserva al pago:", res); // DEBUG: Mira esto en la consola F12
+                                            navigate('/pagar', {
+                                                state: {
+                                                    reservaId: res.idReservation,
+                                                    simulacion: {
+                                                        finalPrice: res.finalPrice,
+                                                        originalPrice: res.originalPrice,
+                                                        turisticPackageName: res.turisticPackage,
+                                                        passengers: res.passengers,
+                                                        discountsName: res.discountsName
+                                                    }
+                                                }
+                                            });
+                                        }}
+                                    >
+                                        Pagar
+                                    </Button>
+                                )}
+                                {res.status === 'PAID' && (
+                                    <Typography variant="body2" color="success.main">Pagado</Typography>
+                                )}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
