@@ -3,17 +3,10 @@ import PackageCard from '../components/PackageCard';
 import React, { useEffect, useState } from 'react';
 import packageService from '../services/package.service';
 import { useKeycloak } from "@react-keycloak/web";
-import {useNavigate} from "react-router-dom";
 
 const ClientPackages = () => {
-    const navigate = useNavigate();
     const [packages, setPackages] = useState([]);
     const { keycloak } = useKeycloak();
-// we take the roles from the realm
-    const roles = keycloak.tokenParsed?.realm_access?.roles || [];
-// boolean cons to read the roles
-    const isAdmin = roles.includes('Admin');
-    const isClient = roles.includes('Client');
     useEffect(() => {
         // Llamamos al servicio usando el token de la sesión actual
         packageService.getAll(keycloak.token)

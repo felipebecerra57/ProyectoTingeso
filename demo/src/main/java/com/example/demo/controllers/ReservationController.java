@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.controllers.DTO.PaymentDetailDTO;
 import com.example.demo.controllers.DTO.ReservationInDTO;
 import com.example.demo.controllers.DTO.ReservationOutDTO;
 import com.example.demo.entities.ReservationEntity;
@@ -58,7 +59,7 @@ public class ReservationController {
         return ResponseEntity.ok(service.getClientReservations());
     }
     @PutMapping("/{id}/pay")
-    public ResponseEntity<String> payReservation(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(service.payReservation(id));
+    public ResponseEntity<PaymentDetailDTO> payReservation(@PathVariable("id") Long id, String method) {
+        return ResponseEntity.ok(service.payReservation(id, method));
     }
 }

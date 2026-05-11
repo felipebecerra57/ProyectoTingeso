@@ -4,15 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9c29ed1d-57e3-4cb2-a172-8fa430f2c65e" name="Changes" comment="View of reservations">
-      <change afterPath="$PROJECT_DIR$/Frontend/src/pages/PaymentPage.jsx" afterDir="false" />
+    <list default="true" id="9c29ed1d-57e3-4cb2-a172-8fa430f2c65e" name="Changes" comment="Payment page :p">
+      <change afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/DTO/PaymentDetailDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/pages/PackageDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/pages/PackageDetail.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/pages/PackageList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/pages/PackageList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/pages/PaymentPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/pages/PaymentPage.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/pages/ReservationList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/pages/ReservationList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/pages/packageListAdmin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/pages/packageListAdmin.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/services/reservation.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/services/reservation.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/DTO/ReservationOutDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/DTO/ReservationOutDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/controllers/ReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/entities/PaymentDetailEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/entities/PaymentDetailEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/services/ReservationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,6 +50,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -60,29 +64,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;Spring Boot.DemoApplication.executor&quot;: &quot;Run&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/felipe/Escritorio/Tingeso&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/snap/intellij-idea-community/743/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.demo [org.apache.maven.plugins:maven-clean-plugin:3.5.0:clean].executor": "Run",
+    "Maven.demo [package].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.DemoApplication.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/felipe/Escritorio/front_back_keycloak",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "Docker",
+    "ts.external.directory.path": "/snap/intellij-idea-community/743/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="demo" />
@@ -107,7 +117,8 @@
       <workItem from="1778027815849" duration="2747000" />
       <workItem from="1778096711426" duration="6215000" />
       <workItem from="1778104256326" duration="11370000" />
-      <workItem from="1778187715171" duration="19591000" />
+      <workItem from="1778187715171" duration="19738000" />
+      <workItem from="1778440187703" duration="12972000" />
     </task>
     <task id="LOCAL-00001" summary="View of client &amp; delete and edit packages.">
       <option name="closed" value="true" />
@@ -125,7 +136,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778115613572</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Payment page :p">
+      <option name="closed" value="true" />
+      <created>1778383869182</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1778383869182</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,7 +153,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="View of client &amp; delete and edit packages." />
     <MESSAGE value="View of reservations" />
-    <option name="LAST_COMMIT_MESSAGE" value="View of reservations" />
+    <MESSAGE value="Payment page :p" />
+    <option name="LAST_COMMIT_MESSAGE" value="Payment page :p" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -143,6 +163,11 @@
           <url>file://$PROJECT_DIR$/Frontend/src/App.jsx</url>
           <line>27</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/Frontend/src/pages/PackageList.jsx</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

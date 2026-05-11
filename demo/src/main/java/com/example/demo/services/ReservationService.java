@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.controllers.DTO.PaymentDetailDTO;
 import com.example.demo.controllers.DTO.ReservationInDTO;
 import com.example.demo.controllers.DTO.ReservationOutDTO;
 import com.example.demo.entities.*;
@@ -9,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -156,13 +158,27 @@ public class ReservationService {
         }
         return reservationsDTO;
     }
-
-    public String payReservation(Long id){
+    public PaymentDetailDTO convertToDTO(PaymentDetailEntity entity, PaymentDetailDTO dto){
+        dto.setDate(entity.getDate());
+        dto.setAmount(entity.getAmount());
+        dto.setPaymentMethod(entity.getPaymentMethod());
+        dto.setPackageName(entity.getReservation().getTuristicPackage().getName());
+        return dto;
+    }
+    public PaymentDetailDTO payReservation(Long id, String method){
         ReservationEntity reservation = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
         reservation.setStatus("PAGADA");
         repository.save(reservation);
-        return ("Reserva pagada con exito!");
+        // generate the payment detail
+        PaymentDetailEntity paymentDetail = new PaymentDetailEntity();
+        paymentDetail.setReservation(reservation);
+        paymentDetail.setDate(LocalDateTime.now());
+        paymentDetail.setAmount(reservation.getFinalAmount());
+        paymentDetail.setPaymentMethod(method);
+        paymentDetailRepository.save(paymentDetail);
+        PaymentDetailDTO dto = new PaymentDetailDTO();
+        return convertToDTO(paymentDetail, dto);
     }
 
     public List<ReservationEntity> getReservationHistory(Long userId){

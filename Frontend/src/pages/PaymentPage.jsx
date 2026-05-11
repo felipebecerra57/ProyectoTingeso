@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Grid, Divider, Paper, Alert } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import reservationService from "../services/reservation.service.js";
+import { MenuItem } from '@mui/material';
 
 const PaymentPage = () => {
     const navigate = useNavigate();
@@ -22,7 +23,8 @@ const PaymentPage = () => {
     const [paymentData, setPaymentData] = useState({
         cardNumber: '',
         cvv: '',
-        expiry: ''
+        expiry: '',
+        paymentMethod: 'VISA'
     });
 
     const [error, setError] = useState("");
@@ -91,6 +93,25 @@ const PaymentPage = () => {
                         <Typography variant="h6" sx={{ mb: 3 }}>Información de la Tarjeta</Typography>
 
                         {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+
+                        <TextField
+                            select
+                            fullWidth
+                            label="Medio de Pago"
+                            value={paymentData.paymentMethod || ""} // Asegura que no sea undefined
+                            onChange={(e) => setPaymentData({...paymentData, paymentMethod: e.target.value})}
+                            sx={{
+                                mb: 3,
+                                "& .MuiOutlinedInput-root": { color: "white" },
+                                "& .MuiInputLabel-root": { color: "gray" },
+                                "& .MuiSvgIcon-root": { color: "white" }
+                            }}
+                        >
+                            <MenuItem value="" disabled>Seleccione un medio de pago</MenuItem>
+                            <MenuItem value="DEBITO">Débito</MenuItem>
+                            <MenuItem value="CREDITO">Crédito</MenuItem>
+                            <MenuItem value="AMEX">American Express</MenuItem>
+                        </TextField>
 
                         <TextField
                             placeholder="0000-0000-0000-0000"

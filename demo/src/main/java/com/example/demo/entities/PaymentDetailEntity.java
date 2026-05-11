@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.example.demo.controllers.DTO.PaymentDetailDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,4 +25,7 @@ public class PaymentDetailEntity {
 
     private LocalDateTime date;
     private Double amount;
+    private String paymentMethod;
+
+
 }

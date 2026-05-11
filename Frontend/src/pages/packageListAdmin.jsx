@@ -18,7 +18,6 @@ const PackageListAdmin = () => {
     const roles = keycloak.tokenParsed?.realm_access?.roles || [];
 // boolean cons to read the roles
     const isAdmin = roles.includes('Admin');
-    const isClient = roles.includes('Client');
 
     useEffect(() => {
         // call the service with the current token
