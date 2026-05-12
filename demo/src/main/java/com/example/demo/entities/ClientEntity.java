@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -18,5 +19,6 @@ public class ClientEntity extends UserEntity{
     private Long phoneNumber;
     private String nationality;
     @OneToMany(mappedBy = "client")
+    @JsonIgnore
     private List<ReservationEntity> reservationHistory;
 }

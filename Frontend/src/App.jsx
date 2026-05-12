@@ -10,6 +10,7 @@ import { Container } from '@mui/material';
 import CreatePackage from "./pages/CreatePackage.jsx";
 import ReservationList from "./pages/ReservationList.jsx"
 import PaymentPage from "./pages/PaymentPage.jsx";
+import ReservationListAdmin from "./pages/ReservationListAdmin.jsx";
 
 function App() {
   const { keycloak, initialized } = useKeycloak();
@@ -45,7 +46,9 @@ function App() {
           <Route path="/nuevoPaquete" element={<CreatePackage />}/>
           <Route path="/detallePaquete" element={<PackageDetail/>}/>
           <Route path="/misReservas" element={<ReservationList/>}/>
+          <Route path="/reservas" element={<ReservationListAdmin/>}/>
           <Route path="/pagar" element={<PaymentPage/>}/>
+
         </Routes>
       </Container>
     </BrowserRouter>

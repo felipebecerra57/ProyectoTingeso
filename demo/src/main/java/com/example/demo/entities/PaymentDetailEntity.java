@@ -26,6 +26,4 @@ public class PaymentDetailEntity {
     private LocalDateTime date;
     private Double amount;
     private String paymentMethod;
-
-
 }

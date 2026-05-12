@@ -84,7 +84,7 @@ public class TuristicPackageService {
     public List<TuristicPackageEntity> findByCapacity(Integer capacity){
         return repository.findByCapacityGreaterThan(capacity);
     }
-    public List<TuristicPackageEntity> findByStatus(String status){
+    public List<TuristicPackageEntity> findByStatus(boolean status){
         return repository.findByStatus(status);
     }
     public List<TuristicPackageEntity> findByDurationDays(Integer duration){

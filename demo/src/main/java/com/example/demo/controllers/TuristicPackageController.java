@@ -69,7 +69,7 @@ public class TuristicPackageController {
     }
     @PreAuthorize("hasAnyRole('Client','Admin')")
     @GetMapping("/filterStatus")
-    public ResponseEntity<List<TuristicPackageEntity>> findByState(@RequestParam String status){
+    public ResponseEntity<List<TuristicPackageEntity>> findByState(@RequestParam Boolean status){
         List<TuristicPackageEntity> packages = service.findByStatus(status);
         return ResponseEntity.ok(packages);
     }

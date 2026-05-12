@@ -1,8 +1,6 @@
 package com.example.demo.repositories;
 
 import com.example.demo.entities.PaymentDetailEntity;
-import com.example.demo.entities.ReservationEntity;
-import com.example.demo.services.PaymentDetailService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +15,6 @@ public interface PaymentDetailRepository extends JpaRepository<PaymentDetailEnti
 
     @Query("SELECT p FROM PaymentDetailEntity p WHERE YEAR(p.date) = :year")
     List<PaymentDetailEntity> findByYear(@Param("year") int year);
+
+    void deleteByReservationId(Long id);
 }

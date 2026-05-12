@@ -84,30 +84,7 @@ const ReservationList = () => {
                                     >
                                         Pagar
                                     </Button>
-
                                 )}
-                                <Button
-                                    variant="contained"
-                                    color="error"
-                                    size="small"
-                                    onClick={() => {
-
-                                        navigate('/pagar', {
-                                            state: {
-                                                reservaId: res.idReservation,
-                                                simulacion: {
-                                                    finalPrice: res.finalPrice,
-                                                    originalPrice: res.originalPrice,
-                                                    turisticPackageName: res.turisticPackage,
-                                                    passengers: res.passengers,
-                                                    discountsName: res.discountsName
-                                                }
-                                            }
-                                        });
-                                    }}
-                                >
-                                    Eliminar
-                                </Button>
                                 {res.status === 'PAID' && (
                                     <Typography variant="body2" color="success.main">Pagado</Typography>
                                 )}

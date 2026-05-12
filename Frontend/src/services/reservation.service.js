@@ -23,13 +23,31 @@ const getReservations = async (token) => {
     });
     return response.data;
 };
-
-const confirmPayment = async (reservationId, method, token) => {
-    const response = await httpClient.put(`/api/reservations/${reservationId}/pay`, {}, {
+const getAllReservations = async (token) => {
+    const response = await httpClient.get('/api/reservations/allReservations', {
         headers: {
             Authorization: `Bearer ${token}`
         }
     });
     return response.data;
 };
-export default { create,simulate,getReservations, confirmPayment };
+
+const confirmPayment = async (reservationId, method, token) => {
+    const response = await httpClient.put(`/api/reservations/${reservationId}/pay`, {paymentMethod: method}, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+        }
+    });
+    return response.data;
+};
+const deleteReservation = async (reservationId, token) => {
+    const response = await httpClient.delete(`/api/reservations/${reservationId}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+    return response.data;
+};
+
+export default { create,simulate,getReservations,getAllReservations,confirmPayment,deleteReservation };

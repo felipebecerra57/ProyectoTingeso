@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/reservations")
@@ -20,6 +21,11 @@ import java.util.List;
 public class ReservationController {
     @Autowired
     ReservationService service;
+
+    @GetMapping("allReservations")
+    //@PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<ReservationEntity>> getAllReservations() {
+        return ResponseEntity.ok(service.findAll());}
 
     @PreAuthorize("hasAnyRole('Client','Admin')")
     @PostMapping("/create")
@@ -29,9 +35,9 @@ public class ReservationController {
             return ResponseEntity.status(HttpStatus.CREATED).body("Reserva creada exitósamente");
         }
         catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+            return ResponseEntity.badRequest().body(e.getMessage());}
     }
+
     @PostMapping("/simulate")
     public ResponseEntity<ReservationOutDTO> simulate(@RequestBody ReservationInDTO dto) {
         return ResponseEntity.ok(service.simulateReservation(dto));
@@ -59,7 +65,15 @@ public class ReservationController {
         return ResponseEntity.ok(service.getClientReservations());
     }
     @PutMapping("/{id}/pay")
-    public ResponseEntity<PaymentDetailDTO> payReservation(@PathVariable("id") Long id, String method) {
+    public ResponseEntity<PaymentDetailDTO> payReservation(@PathVariable Long id, @RequestBody Map<String, Object> request) {
+        String method = (String) request.get("paymentMethod");
+        System.out.println("Método de pago recibido: " + method);
         return ResponseEntity.ok(service.payReservation(id, method));
+    }
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('Admin')")
+    public ResponseEntity<?> deleteReservation(@PathVariable Long id){
+        service.deleteReservation(id);
+        return ResponseEntity.ok().build();
     }
 }

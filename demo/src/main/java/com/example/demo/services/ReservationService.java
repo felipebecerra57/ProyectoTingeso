@@ -5,6 +5,8 @@ import com.example.demo.controllers.DTO.ReservationInDTO;
 import com.example.demo.controllers.DTO.ReservationOutDTO;
 import com.example.demo.entities.*;
 import com.example.demo.repositories.*;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -168,6 +170,7 @@ public class ReservationService {
     public PaymentDetailDTO payReservation(Long id, String method){
         ReservationEntity reservation = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
+        // set the reservation to "Pagada"
         reservation.setStatus("PAGADA");
         repository.save(reservation);
         // generate the payment detail
@@ -180,7 +183,18 @@ public class ReservationService {
         PaymentDetailDTO dto = new PaymentDetailDTO();
         return convertToDTO(paymentDetail, dto);
     }
+    @Transactional
+    public void deleteReservation(Long id){
+        ReservationEntity reservation = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
+        TuristicPackageEntity pkg = reservation.getTuristicPackage();
+        pkg.setCapacity(pkg.getCapacity() + reservation.getPassengers());
+        packageRepository.save(pkg);
+        paymentDetailRepository.deleteByReservationId(id);
+        repository.delete(reservation);
+    }
 
+    public List<ReservationEntity> findAll(){return repository.findAll();}
     public List<ReservationEntity> getReservationHistory(Long userId){
         return repository.findByClient(userId);
     }
